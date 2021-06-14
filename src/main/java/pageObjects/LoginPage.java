@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,15 @@ public class LoginPage {
 
 
     //actions on elements
+
+    public void validateLoginPage()
+    {
+        Assert.assertTrue(invoiceManagerText.isDisplayed());
+    }
+
+
+
+
     public void typeEmail(String email)
     {
         emailField.sendKeys(email);
