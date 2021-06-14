@@ -1,6 +1,7 @@
 package utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -36,8 +37,12 @@ public class CommonFunctions {
         properties.load(fileInputStream);
         String value = properties.getProperty(key);
         return value;
+    }
 
-
+    public void compareUrl(String expected)
+    {
+       String actual = driver.getCurrentUrl();
+       Assert.assertEquals(actual,expected);
     }
 
 
