@@ -1,8 +1,12 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import utils.CommonFunctions;
 
-public class AdminHomePage {
+public class AdminHomePage extends CommonFunctions {
 
     public WebDriver driver;
 
@@ -21,7 +25,28 @@ public class AdminHomePage {
 
     //locators
 
+    @FindBy(xpath = "//h2[normalize-space(text())='Welcome to Invoice Manager!']")
+    public WebElement welcomeText;
 
+
+    @FindBy(xpath = "//a[@class='mm_products']")
+    public WebElement productsFilterBtn;
+
+
+    public void chooseMainCategory(String main)
+    {
+        WebElement filter = driver.findElement(By.xpath("//a[@class='mm_"+main+"']"));
+        moveToElementAndClick(filter);
+
+    }
+
+
+    public void chooseSubCategory(String sub)
+    {
+        WebElement subFilter = driver.findElement(By.xpath("//a[text()='"+sub+"']"));
+        scrollToElementAndClick(subFilter);
+
+    }
 
 
 }

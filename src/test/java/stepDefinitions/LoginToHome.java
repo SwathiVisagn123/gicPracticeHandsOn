@@ -55,10 +55,11 @@ public class LoginToHome extends CommonFunctions {
 
     }
     @When("I change the url end to home")
-    public void i_change_the_url_end_to_home() throws InterruptedException {
+    public void i_change_the_url_end_to_home() throws InterruptedException, IOException {
 
         adminHomePage.changeUrl();
         Thread.sleep(2000);
+
 
 
     }
