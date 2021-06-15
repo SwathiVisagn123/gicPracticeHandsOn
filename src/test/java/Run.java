@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features=".",dryRun =false,tags="@loginToHome")
+@CucumberOptions(features=".",dryRun =false,tags="@addProducts")
 
 public class Run {
+
 
 
 
