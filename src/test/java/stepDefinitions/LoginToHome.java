@@ -29,9 +29,10 @@ public class LoginToHome extends CommonFunctions {
     }
 
     @When("I enter the valid email {string} in email address field")
-    public void i_enter_the_valid_email_in_email_address_field(String email) {
+    public void i_enter_the_valid_email_in_email_address_field(String email) throws InterruptedException {
 
        loginPage.typeEmail(email);
+
 
 
     }
@@ -46,16 +47,18 @@ public class LoginToHome extends CommonFunctions {
         loginPage.clickLoginButton();
     }
     @Then("I should be re-directed to Client's Home Page")
-    public void i_should_be_re_directed_to_client_s_home_page() {
+    public void i_should_be_re_directed_to_client_s_home_page() throws InterruptedException {
 
 
         clientPage.validateClientPage();
+        Thread.sleep(2000);
 
     }
     @When("I change the url end to home")
-    public void i_change_the_url_end_to_home() {
+    public void i_change_the_url_end_to_home() throws InterruptedException {
 
         adminHomePage.changeUrl();
+        Thread.sleep(2000);
 
 
     }
