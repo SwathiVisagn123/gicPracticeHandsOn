@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,6 +55,15 @@ public class CommonFunctions {
     }
 
 
+    public void explicitWait(WebElement element)
+    {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+
+
+
     public void compareUrl(String expected)
     {
        String actual = driver.getCurrentUrl();
@@ -71,6 +82,12 @@ public class CommonFunctions {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();",element);
     }
 
+    public void scrollUntilVisible(WebElement element)
+    {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);",element);
+
+    }
 
 
 

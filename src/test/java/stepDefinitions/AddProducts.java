@@ -82,7 +82,7 @@ ListProductsPage listProductsPage = new ListProductsPage(driver);
 
         listProductsPage.validateListProductPage();
         listProductsPage.validateSuccessAlert();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
     }
 
