@@ -1,6 +1,7 @@
 Feature: Add Product feature to add new products
 
-  As a user I should be able to add new products under Add Products section.
+  As a system admin of Invoice Manager
+  I should be able to add new products under Add Products section.
 
   @addProducts
   Scenario Outline: Validate add product functionality with valid input data

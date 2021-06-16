@@ -1,6 +1,6 @@
 Feature: Login to Admin Home Page
 
-  As a user
+  As a system admin of Invoice Manager
   I should be able to login and get re-directed to Admin Home Page
 
   @loginToHome
