@@ -34,6 +34,8 @@ public class ListCustomersPage extends CommonFunctions {
         moveToElementAndClick(Button);
     }
 
+    //few columns deselected
+
     public void clickColumnName(String columnName) {
         WebElement columnValue = driver.findElement(By.xpath("//a[text()='" + columnName + "']"));
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -41,22 +43,27 @@ public class ListCustomersPage extends CommonFunctions {
         scrollToElementAndClick(columnValue);
     }
 
-    //few columns deselected
 
-    public void validateColumnFilter(String columnName) {
-
+    public void validateColumnsDisplayForFew(String columnName) {
 
         List<WebElement> columnValues = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
         System.out.println("The displayed columns are :");
         for (WebElement value : columnValues)
         {
             String valueName = value.getText();
+
+            //validate results
+            //Assert.assertEquals(valueName, columnName);
+
+            //print filter results and valuations
             System.out.println(valueName);
-            if (valueName.contains(columnName))
+            if (valueName.equals(columnName))
             {
                 System.out.println("Unselected columns are present.Validation failed");
             }
             else System.out.println("Filter applied Successful");
+
+
 
         }
 
@@ -73,32 +80,75 @@ public class ListCustomersPage extends CommonFunctions {
         }
     }
 
+    public void validateColumnsDisplayedForNone() {
+
+        List<WebElement> columnNames = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
+        ArrayList<String> list = new ArrayList<>();
+
+        //print results
+        System.out.println("The displayed columns are :");
+        for (WebElement columnName : columnNames)
+        {
+            String column = columnName.getText();
+            list.add(column);
+            System.out.println(column);
+
+        }
+        //validate results
+        //Assert.assertTrue(list.isEmpty());
+
+    }
+
 
     //deselect none or select all
-    public void clickAllInactiveColumns() throws InterruptedException {
+    public void clickAllInactiveColumns() throws InterruptedException
+    {
+
+
+        //columns filter selected
         List<WebElement> element = driver.findElements(By.xpath("//li[@class='dt-button buttons-columnVisibility']"));
-        for (WebElement value : element) {
+        for (WebElement value : element)
+        {
             value.click();
             Thread.sleep(1000);
         }
 
-    }
 
-
-    public void validateColumnsDisplayed() {
-
-        List<WebElement> columnValues = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
-        //print results
-        System.out.println("The displayed columns are :");
-        for (WebElement columnName : columnValues) {
-            String column = columnName.getText();
-            System.out.println(column);
-            //validate results
-
-
-        }
 
 
     }
+
+public void validateColumnsDisplayedForAll()
+{
+    //collecting all column names before filter container
+    List<WebElement> before = driver.findElements(By.xpath("//ul[@class='dt-button-collection dropdown-menu']"));
+    ArrayList<String> listBefore = new ArrayList<>();
+    for (WebElement columnName : before)
+    {
+        String column = columnName.getText();
+        listBefore.add(column);
+      }
+
+    //column names after filter selection
+    List<WebElement> after = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
+    ArrayList<String> listAfter = new ArrayList<>();
+
+    System.out.println("The displayed columns are :");
+    for (WebElement columnName : after)
+    {
+        String column = columnName.getText();
+        listAfter.add(column);
+        System.out.println(column);
+
+    }
+
+    //validating results by comparing
+    //Assert.assertEquals(listBefore,listAfter);
 
 }
+
+
+
+}
+
+

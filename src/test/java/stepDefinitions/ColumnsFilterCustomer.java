@@ -40,7 +40,7 @@ public class ColumnsFilterCustomer extends CommonFunctions {
     @Then("I should not retrieve the de-selected columns {string} as the filter result")
     public void i_should_not_retrieve_the_de_selected_columns_as_the_filter_result(String columnName) {
 
-        listCustomersPage.validateColumnFilter(columnName);
+        listCustomersPage.validateColumnsDisplayForFew(columnName);
 
     }
 
@@ -57,7 +57,7 @@ public class ColumnsFilterCustomer extends CommonFunctions {
     @Then("I should not retrieve any filter results")
     public void i_should_not_retrieve_any_filter_results() {
 
-     listCustomersPage.validateColumnsDisplayed();
+     listCustomersPage.validateColumnsDisplayedForNone();
 
     }
 
@@ -74,7 +74,7 @@ public class ColumnsFilterCustomer extends CommonFunctions {
     public void i_should_retrieve_all_the_columns_in_filter_result() {
 
 
-        listCustomersPage.validateColumnsDisplayed();
+        listCustomersPage.validateColumnsDisplayedForAll();
     }
 
 
