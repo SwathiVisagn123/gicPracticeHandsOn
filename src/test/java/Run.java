@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features=".",dryRun =false,tags="@retrieveProduct")
+@CucumberOptions(features=".",dryRun =false,tags="@customerColumnsFilter")
 
 public class Run {
 
