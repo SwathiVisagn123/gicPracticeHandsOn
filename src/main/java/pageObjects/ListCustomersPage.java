@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonFunctions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ListCustomersPage extends CommonFunctions {
@@ -36,26 +37,32 @@ public class ListCustomersPage extends CommonFunctions {
 
     //few columns deselected
 
+
+
     public void clickColumnName(String columnName) {
+
         WebElement columnValue = driver.findElement(By.xpath("//a[text()='" + columnName + "']"));
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(columnValue));
         scrollToElementAndClick(columnValue);
+
     }
+
+
 
 
     public void validateColumnsDisplayForFew(String columnName) {
 
+       //element that has column names
         List<WebElement> columnValues = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
+
+        //print filter results
         System.out.println("The displayed columns are :");
+
         for (WebElement value : columnValues)
         {
             String valueName = value.getText();
 
-            //validate results
-            //Assert.assertEquals(valueName, columnName);
-
-            //print filter results and valuations
             System.out.println(valueName);
             if (valueName.equals(columnName))
             {
@@ -63,10 +70,16 @@ public class ListCustomersPage extends CommonFunctions {
             }
             else System.out.println("Filter applied Successful");
 
-
-
         }
 
+        //Validating the element that has column names,do not have deselected column
+        //I am finding elements that has the deselected column name and storing the results in a list.
+        //List should be empty if element is not present
+        //I am using list to store the result is null because otherwise the element is not present in the DOM.
+
+
+        List<WebElement> deselected = driver.findElements(By.xpath("//th[text()='"+columnName+"']"));
+        Assert.assertTrue(deselected.isEmpty());
 
     }
 
@@ -83,19 +96,23 @@ public class ListCustomersPage extends CommonFunctions {
     public void validateColumnsDisplayedForNone() {
 
         List<WebElement> columnNames = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
-        ArrayList<String> list = new ArrayList<>();
+
 
         //print results
         System.out.println("The displayed columns are :");
         for (WebElement columnName : columnNames)
         {
             String column = columnName.getText();
-            list.add(column);
+
             System.out.println(column);
 
         }
-        //validate results
-        //Assert.assertTrue(list.isEmpty());
+        //Validating the element that has column names,do not have deselected column
+        //I am finding elements that has the deselected column name and storing the results in a list.
+        //List should be empty if element is not present
+        //I am using list to store the result is null because otherwise the element is not present in the DOM.
+        List<WebElement> element = driver.findElements(By.xpath("//li[@class='dt-button buttons-columnVisibility active']"));
+        Assert.assertTrue(element.isEmpty());
 
     }
 
@@ -105,12 +122,13 @@ public class ListCustomersPage extends CommonFunctions {
     {
 
 
-        //columns filter selected
+        //columns filter selected (selecting the two default hidden columns to display all columns)
         List<WebElement> element = driver.findElements(By.xpath("//li[@class='dt-button buttons-columnVisibility']"));
         for (WebElement value : element)
         {
             value.click();
             Thread.sleep(1000);
+
         }
 
 
@@ -120,30 +138,28 @@ public class ListCustomersPage extends CommonFunctions {
 
 public void validateColumnsDisplayedForAll()
 {
-    //collecting all column names before filter container
-    List<WebElement> before = driver.findElements(By.xpath("//ul[@class='dt-button-collection dropdown-menu']"));
-    ArrayList<String> listBefore = new ArrayList<>();
-    for (WebElement columnName : before)
-    {
-        String column = columnName.getText();
-        listBefore.add(column);
-      }
 
-    //column names after filter selection
-    List<WebElement> after = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
-    ArrayList<String> listAfter = new ArrayList<>();
 
-    System.out.println("The displayed columns are :");
-    for (WebElement columnName : after)
-    {
-        String column = columnName.getText();
-        listAfter.add(column);
-        System.out.println(column);
+  //column names after filter selection
+  List<WebElement> after = driver.findElements(By.xpath("//*[@id=\"fileData\"]/thead/tr"));
 
-    }
 
-    //validating results by comparing
-    //Assert.assertEquals(listBefore,listAfter);
+   System.out.println("The displayed columns are :");
+  for (WebElement columnName : after)
+   {
+       String column = columnName.getText();
+      System.out.println(column);
+
+}
+
+   //the columns after selected will have the class name mentioning active, so finding if elements with below class name exists.
+    //it must be null as all the columns are selected and displayed.
+    List<WebElement> element = driver.findElements(By.xpath("//li[@class='dt-button buttons-columnVisibility']"));
+    Assert.assertTrue(element.isEmpty());
+
+
+
+
 
 }
 
